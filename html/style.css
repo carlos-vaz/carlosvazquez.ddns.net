@@ -1,0 +1,7 @@
+#log {
+	color:green;
+	height:250px;
+	width:40%;
+	overflow:auto;
+	border:1px black solid;
+}
