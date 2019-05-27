@@ -69,6 +69,7 @@ function init_session_callback() {
 	if (session_request.readyState == 4) {
 	   if(session_request.status == 200) {
 		log("Response: initialized shell session...");
+		document.getElementById('terminal').insertAdjacentHTML('beforeend', session_request.responseText);
 	   } else {
 		log("Unable to load response to your AJAX request");
 		alert("Unable to load response to your AJAX request (init session request).");
