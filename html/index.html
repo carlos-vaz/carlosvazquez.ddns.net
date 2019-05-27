@@ -22,7 +22,7 @@ function new_request() {
 		ajax_request.open("POST", url, true);
 		ajax_request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		ajax_request.send(payload);
-		document.getElementById('log').insertAdjacentHTML('beforeend', "Sent AJAX request to run command " + " PAYLOAD<br>");
+		log("Sent AJAX request to run command " + " PAYLOAD");
 		count = count + 1;
 		document.getElementById('counter').innerHTML = count;
 	} else {
@@ -34,10 +34,10 @@ function display_result() {
 	document.getElementById('put_state').innerHTML = ajax_request.readyState;
 	if(ajax_request.readyState == 4) { 	// 4 => page loaded
 	  if(ajax_request.status == 200)  {	// 200 => OK
-		document.getElementById('log').insertAdjacentHTML('beforeend', "Received response from driveloop.php<br>");
+		log("Received response from driveloop.php");
 		document.getElementById('mutable').innerHTML = ajax_request.responseText;
 	  } else {
-		document.getElementById('log').insertAdjacentHTML('beforeend', "Unable to load response to your AJAX request<br>");
+		log("Unable to load response to your AJAX request");
 		alert("Unable to load response to your AJAX request.");
 	  }
 	}	
@@ -48,10 +48,10 @@ function init_session() {
 	session_request = null;
         if (window.XMLHttpRequest) {
                 session_request = new XMLHttpRequest();
-		document.getElementById('log').insertAdjacentHTML('beforeend', "Your browser uses XMLHttpRequest<br>");
+		log("Your browser uses XMLHttpRequest");
         } else if (window.ActiveXObject) {
                 session_request = new ActiveXObject("Microsoft.XMLHTTP");
-		document.getElementById('log').insertAdjacentHTML('beforeend', "Your browser uses ActiveXObject<br>");
+		log("Your browser uses ActiveXObject");
         }
         if (session_request != null) {
                 session_request.onreadystatechange = init_session_callback;
@@ -59,7 +59,7 @@ function init_session() {
                 session_request.open("POST", url, true);
                 session_request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                 session_request.send(null);
-		document.getElementById('log').insertAdjacentHTML('beforeend', "Sent AJAX request for server shell session<br>");
+		log("Sent AJAX request for server shell session");
         } else {
                 alert("Rats! Looks like your browser doesn't support XMLHTTP.");
         }
@@ -68,12 +68,18 @@ function init_session() {
 function init_session_callback() {
 	if (session_request.readyState == 4) {
 	   if(session_request.status == 200) {
-		document.getElementById('log').insertAdjacentHTML('beforeend', "Response: initialized shell session...<br>");
+		log("Response: initialized shell session...");
 	   } else {
-		document.getElementById('log').insertAdjacentHTML('beforeend', "Unable to load response to your AJAX request<br>");
+		log("Unable to load response to your AJAX request");
 		alert("Unable to load response to your AJAX request (init session request).");
 	   }
 	}
+}
+	
+function log(text) {
+	var log_obj = document.getElementById('log');
+	log_obj.insertAdjacentHTML('beforeend', text + "<br>");
+	log_obj.scrollTop = log_obj.scrollHeight;
 }
 </script>
 </head>
