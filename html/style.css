@@ -1,7 +1,18 @@
-#log {
-	color:green;
-	height:250px;
+#log_frame {
 	width:40%;
+	height:250px;
+	border:1px black solid;
+	padding:6px;
+	margin:2px;
+}
+
+#log {
+	margin-bottom:20px;
+	color:black;
+	height:200px;
 	overflow:auto;
 	border:1px black solid;
+	background:green;
 }
+
+
