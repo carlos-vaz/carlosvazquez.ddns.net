@@ -35,7 +35,7 @@ function display_result() {
 	if(ajax_request.readyState == 4) { 	// 4 => page loaded
 	  if(ajax_request.status == 200)  {	// 200 => OK
 		log("Received response from driveloop.php");
-		document.getElementById('mutable').innerHTML = ajax_request.responseText;
+		document.getElementById('terminal').innerHTML = ajax_request.responseText;
 	  } else {
 		log("Unable to load response to your AJAX request");
 		alert("Unable to load response to your AJAX request.");
@@ -89,22 +89,18 @@ function log(text) {
 	<h1 id="test_dispcmd" style="text-align:center;">WELCOME!</h1>
 </div>
 
-<div style="height:140px;border-bottom:1px green solid;">
+<div style="height:160px;border-bottom:1px green solid;">
 	<p id="put_state" style="color:blue;text-align:center;">
 		This page is under construction. <br>Please check back in soon!
-	</p>
-	<p id="mutable" style="color:green;text-align:center;">
-		In the meantime...
 	</p>
 	<input id="user_command" type="text" name="command">
 	<button onclick="new_request()">Request</button>
 	<p id="counter">0</p>
 </div>
 
-<div>
-	<div id="pages">
-		About
-	</div>
+<div id="bottom">
+	<div id="pages">About</div>
+	<div id="middle_content">Middle</div>
 	<div id="right_content">
 		<div class="console_frame">
 			<p style="text-align:center;">TERMINAL</p>
@@ -119,5 +115,4 @@ function log(text) {
 </body>
 
 </html>
-
 
