@@ -1,0 +1,5 @@
+# Ignore the following:
+security/
+security/**
+**/*.save
+**/*.swp
