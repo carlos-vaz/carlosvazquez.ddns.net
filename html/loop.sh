@@ -2,11 +2,11 @@
 
 #while true
 #do
-if read line </var/www/html/fifo_tobash; then
+if read line </var/www/html/fifo/fifo_tobash; then
 	if [[ "$line" == 'q' ]]; then
 		break
 	fi
-	echo "Read: " $line > /var/www/html/fifo_tophp
+	echo "Read: " $line > /var/www/html/fifo/fifo_tophp
 fi
 #done
-#echo "Finished" > /var/www/html/fifo_tophp
+#echo "Finished" > /var/www/html/fifo/fifo_tophp
