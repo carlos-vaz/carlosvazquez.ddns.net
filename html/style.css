@@ -1,4 +1,9 @@
-#log_frame {
+#welcome {
+	height:50px;
+	border-bottom:1px green solid;
+}
+
+.console_frame {
 	width:40%;
 	height:250px;
 	border:1px black solid;
@@ -6,7 +11,7 @@
 	margin:2px;
 }
 
-#log {
+.console {
 	margin-bottom:20px;
 	color:black;
 	height:200px;
@@ -15,4 +20,20 @@
 	background:green;
 }
 
+#pages {
+	width:15%;
+	height:100%;
+	border-right:1px green solid;
+	position:absolute:
+	left:0;
+	display:inline-block;
+}
 
+#right_content {
+	width:80%;
+	height:100%;
+	border:1px blue solid;
+	position:absolute;
+	right:0;
+	display:inline-block;
+}

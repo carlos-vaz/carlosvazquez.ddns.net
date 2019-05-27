@@ -85,31 +85,39 @@ function log(text) {
 </head>
 
 <body onload="init_session()" style="background-color:rgb(200,200,200);">
-<!-- <div id="welcome">
- <h1 id="test_dispcmd" style="text-align:center;">WELCOME!</h1>
+<div id="welcome">
+	<h1 id="test_dispcmd" style="text-align:center;">WELCOME!</h1>
 </div>
--->
-<div style="height:100px;">
-	<h1 id="test_dispcmd" style="text-align:center;" >WELCOME!</h1>
+
+<div style="height:140px;border-bottom:1px green solid;">
+	<p id="put_state" style="color:blue;text-align:center;">
+		This page is under construction. <br>Please check back in soon!
+	</p>
+	<p id="mutable" style="color:green;text-align:center;">
+		In the meantime...
+	</p>
+	<input id="user_command" type="text" name="command">
+	<button onclick="new_request()">Request</button>
+	<p id="counter">0</p>
 </div>
-<hr>
-<pre id="put_state" style="color:blue;text-align:center;">
-	This page is under construction. 
-	Please check back in soon!
-</pre>
-<p id="mutable" style="color:green;text-align:center;">
-	In the meantime...
-</p>
-<input id="user_command" type="text" name="command">
-<button onclick="new_request()">Request</button>
-<p id="counter">0</p>
-<hr>
+
 <div>
-	<div id="log_frame">
-		<p style="text-align:center;">LOG</p>
-		<div id="log"<</div>
+	<div id="pages">
+		About
+	</div>
+	<div id="right_content">
+		<div class="console_frame">
+			<p style="text-align:center;">TERMINAL</p>
+			<div id="terminal" class="console"></div>
+		</div>
+		<div class="console_frame">
+			<p style="text-align:center;">LOG</p>
+			<div id="log" class="console"></div>
+		</div>
 	</div>
 </div>
 </body>
 
 </html>
+
+
