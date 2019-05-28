@@ -8,9 +8,7 @@
 var ajax_request;
 var parser = new DOMParser();
 var sessionid = null;
-var count = 0;
 function new_request() {
-	document.getElementById('test_dispcmd').innerHTML = document.getElementById('user_command').value;
 	ajax_request = null;
 	if (window.XMLHttpRequest) {
 		ajax_request = new XMLHttpRequest();
@@ -26,8 +24,6 @@ function new_request() {
 		ajax_request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		ajax_request.send(payload);
 		log("Sent AJAX request to run command " + cmd);
-		count = count + 1;
-		document.getElementById('counter').innerHTML = count;
 	} else {
 		alert("Rats! Looks like your browser doesn't support XMLHTTP.");
 	}
@@ -100,17 +96,15 @@ function terminal(text) {
 
 <body onload="init_session()" style="background-color:rgb(200,200,200);">
 <div id="welcome">
-	<h1 id="test_dispcmd" style="text-align:center;">WELCOME!</h1>
+	<h1 style="text-align:center;">WELCOME!</h1>
 </div>
 
 <div style="height:100px;border-bottom:1px green solid;">
 	<p id="put_state" style="color:blue;text-align:center;">
-		Welcome to carlosvazquez.ddns.net, a site powered by the fearsome Raspberry Pi computer:<br>
-		The Beast, running Apache. 
+		Welcome to carlosvazquez.ddns.net, a site powered by a very fearsome<br>
+		Raspberry Pi computer running Apache known only as The Beast. 
 	</p>
-	<input id="user_command" type="text" name="command">
-	<button onclick="new_request()">Request</button>
-	<p id="counter">0</p>
+	<p style="font-size:smaller;text-align:center;">This site accepts cookies. Please send them to 507 Cato Street, Pittsburgh, PA.</p>
 </div>
 
 <div id="bottom">
@@ -118,8 +112,12 @@ function terminal(text) {
 	<div id="middle_content">Middle</div>
 	<div id="right_content">
 		<div class="console_frame">
-			<p style="text-align:center;">TERMINAL</p>
+		   <div>
+			<p style="text-align:center;display:inline-block;">TERMINAL</p>
+			<input id="user_command" type="text" name="command" style="display:inline-block;">
+			<button onclick="new_request()" style="display:inline-block;">Request</button>
 			<div id="terminal" class="console"></div>
+		   </div>
 		</div>
 		<div class="console_frame">
 			<p style="text-align:center;">EVENT LOG</p>

@@ -14,5 +14,5 @@ echo "<p id=\"dest_terminal\">Welcome, " . $uid . "!<br></p>";
 echo "<p id=\"dest_log\">" . $sessionid . "</p>";
 
 // Start a bash script implementing a simple Read Eval Print loop
-shell_exec("nohup /var/www/html/session.sh " . $sessionid . " > /dev/null &");
+shell_exec("nohup /var/www/scripts/session.sh " . $sessionid . " > /dev/null &");
 ?>
