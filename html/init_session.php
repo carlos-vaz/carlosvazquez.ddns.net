@@ -6,8 +6,8 @@ $sessionid = md5($uid . shell_exec("cat /var/www/security/credentials"));
 shell_exec("echo " . $uid . " " . $sessionid . " >> /var/www/security/userlog");
 
 // Create named pipes, unique to this user, for passing commands to the session and outputs to php
-shell_exec("mkfifo /var/www/html/fifo/" . $sessionid . "_tobash");
-shell_exec("mkfifo /var/www/html/fifo/" . $sessionid . "_tophp");
+shell_exec("mkfifo /var/www/fifo/" . $sessionid . "_tobash");
+shell_exec("mkfifo /var/www/fifo/" . $sessionid . "_tophp");
 
 // Respond to AJAX request
 echo "<p id=\"dest_terminal\">Welcome, " . $uid . "!<br>beast$ </p>";

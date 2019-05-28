@@ -6,8 +6,8 @@ session_id=$1;
 session_pid=$2;
 
 # Clean up your pipes
-rm /var/www/html/fifo/${session_id}_tophp;
-rm /var/www/html/fifo/${session_id}_tobash;
+rm /var/www/fifo/${session_id}_tophp;
+rm /var/www/fifo/${session_id}_tobash;
 
 # Kill your session process
 kill -TERM ${session_pid};

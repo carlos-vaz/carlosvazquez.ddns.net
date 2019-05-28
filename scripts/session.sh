@@ -10,12 +10,12 @@ bash -c "sleep "${TIMEOUT}"; /var/www/scripts/webuser_cleanup.sh "${sessionid}" 
 
 while true
 do
-	if read line </var/www/html/fifo/${sessionid}_tobash; then
+	if read line </var/www/fifo/${sessionid}_tobash; then
 		if [[ "$line" == 'quit' ]]; then
 			break
 		fi
-		#echo ${line} "&> fifo" > /var/www/html/fifo/${sessionid}_tophp
-		${line} &> /var/www/html/fifo/${sessionid}_tophp
+		#echo ${line} "&> fifo" > /var/www/fifo/${sessionid}_tophp
+		${line} &> /var/www/fifo/${sessionid}_tophp
 	fi
 done
-echo "Finished" > /var/www/html/fifo/${sessionid}_tophp
+echo "Finished" > /var/www/fifo/${sessionid}_tophp
