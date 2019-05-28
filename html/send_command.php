@@ -11,5 +11,10 @@ if (!file_exists("/var/www/html/fifo/" . $requested_session . "_tophp") || !file
 
 // Pass command request to session
 shell_exec("echo " . $command . " > /var/www/html/fifo/" . $requested_session . "_tobash"); // blocks php until/unless session.sh has begun
-echo exec("cat /var/www/html/fifo/" . $requested_session . "_tophp") . "\n"; // send output of bash back to the client
+// send output of bash back to the client
+exec("cat /var/www/html/fifo/" . $requested_session . "_tophp", $OUTPUT);
+foreach($OUTPUT as $line) {
+	echo $line . "<br>";
+}
+echo "beast$ ";
 ?>

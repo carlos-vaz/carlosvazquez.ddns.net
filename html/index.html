@@ -8,6 +8,7 @@
 var ajax_request;
 var parser = new DOMParser();
 var sessionid = null;
+var cmd = null;
 function new_request() {
 	ajax_request = null;
 	if (window.XMLHttpRequest) {
@@ -18,7 +19,7 @@ function new_request() {
 	if (ajax_request != null) {
 		ajax_request.onreadystatechange = display_result;
 		var url = "/send_command.php";
-		var cmd = document.getElementById('user_command').value;
+		cmd = document.getElementById('user_command').value;
 		var payload = "cmd=" + cmd + "&sessionid=" + sessionid;
 		ajax_request.open("POST", url, true);
 		ajax_request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -30,11 +31,11 @@ function new_request() {
 }
 
 function display_result() {
-	document.getElementById('put_state').innerHTML = ajax_request.readyState;
+	//document.getElementById('put_state').innerHTML = ajax_request.readyState;
 	if(ajax_request.readyState == 4) { 	// 4 => page loaded
 	  if(ajax_request.status == 200)  {	// 200 => OK
 		log("Received response from send_command.php");
-		terminal(ajax_request.responseText);
+		terminal(cmd + "<br>" + ajax_request.responseText);
 	  } else {
 		log("Unable to load response to your AJAX request");
 		alert("Unable to load response to your AJAX request.");
@@ -87,7 +88,7 @@ function log(text) {
 
 function terminal(text) {
 	var term_obj = document.getElementById('terminal');
-	term_obj.insertAdjacentHTML('beforeend', text + "<br>");
+	term_obj.insertAdjacentHTML('beforeend', text);
 	term_obj.scrollTop = term_obj.scrollHeight;
 }
 

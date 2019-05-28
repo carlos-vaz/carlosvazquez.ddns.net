@@ -14,6 +14,7 @@ do
 		if [[ "$line" == 'quit' ]]; then
 			break
 		fi
+		#echo ${line} "&> fifo" > /var/www/html/fifo/${sessionid}_tophp
 		${line} &> /var/www/html/fifo/${sessionid}_tophp
 	fi
 done

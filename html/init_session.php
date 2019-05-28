@@ -10,7 +10,7 @@ shell_exec("mkfifo /var/www/html/fifo/" . $sessionid . "_tobash");
 shell_exec("mkfifo /var/www/html/fifo/" . $sessionid . "_tophp");
 
 // Respond to AJAX request
-echo "<p id=\"dest_terminal\">Welcome, " . $uid . "!<br></p>";
+echo "<p id=\"dest_terminal\">Welcome, " . $uid . "!<br>beast$ </p>";
 echo "<p id=\"dest_log\">" . $sessionid . "</p>";
 
 // Start a bash script implementing a simple Read Eval Print loop
