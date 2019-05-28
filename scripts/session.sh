@@ -1,7 +1,7 @@
 #!/bin/bash
 # Invoked automatically (by init_session.php) after loading carlosvazquez.ddns.net
 
-TIMEOUT=30;
+TIMEOUT=300;	# Timeout after 5 minutes
 sessionid=$1;
 pid=$$;
 

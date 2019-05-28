@@ -6,7 +6,7 @@ $command = "harmless";
 
 // Verify requested sessionid
 if (!file_exists("/var/www/html/fifo/" . $requested_session . "_tophp") || !file_exists("/var/www/html/fifo/" . $requested_session . "_tobash")) {
-	exit("The session you are trying to reach is old or invalid\n");
+	exit("The session you are trying to reach has expired! Please reload the page. \n");
 }
 
 // Pass command request to session
