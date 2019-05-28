@@ -9,11 +9,11 @@ sessionid=$1;
 
 while true
 do
-	if read line </var/www/jail/fifo/${sessionid}_tobash; then
+	if read line </fifo/${sessionid}_tobash; then
 		if [[ "$line" == 'quit' ]]; then
 			break
 		fi
-		${line} &> /var/www/jail/fifo/${sessionid}_tophp
+		${line} &> /fifo/${sessionid}_tophp
 	fi
 done
-echo "Finished" > /var/www/jail/fifo/${sessionid}_tophp
+echo "Finished" > /fifo/${sessionid}_tophp
