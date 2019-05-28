@@ -15,17 +15,5 @@ pid=$$;
 # Schedule a cleanup of this session in TIMEOUT seconds
 bash -c "sleep "${TIMEOUT}"; /var/www/scripts/webuser_cleanup.sh "${sessionid}" "${pid} &
 
-# Change user (currently www-data), & change root directory to /var/www/jail
-chroot /var/www/jail /bin/bash;
-
-while true
-do
-	if read line </var/www/fifo/${sessionid}_tobash; then
-		if [[ "$line" == 'quit' ]]; then
-			break
-		fi
-		#echo ${line} "&> fifo" > /var/www/fifo/${sessionid}_tophp
-		${line} &> /var/www/fifo/${sessionid}_tophp
-	fi
-done
-echo "Finished" > /var/www/fifo/${sessionid}_tophp
+# Send this process to jail and begin its session there
+/var/www/scripts/start_session_in_jail;

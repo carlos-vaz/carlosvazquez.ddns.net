@@ -1,8 +1,8 @@
 <?php
 // Retrieve sessionid and bash command from new HTTP request
 $requested_session = $_POST["sessionid"];
-//$command = $_POST["cmd"];
-$command = "harmless";
+$command = $_POST["cmd"];
+//$command = "harmless";
 
 // Verify requested sessionid
 if (!file_exists("/var/www/fifo/" . $requested_session . "_tophp") || !file_exists("/var/www/fifo/" . $requested_session . "_tobash")) {
