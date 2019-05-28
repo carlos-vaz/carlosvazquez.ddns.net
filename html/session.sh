@@ -9,7 +9,7 @@ do
 		if [[ "$line" == 'quit' ]]; then
 			break
 		fi
-		echo "Read: " $line > /var/www/html/fifo/${sessionid}_tophp
+		${line} &> /var/www/html/fifo/${sessionid}_tophp
 	fi
 done
 echo "Finished" > /var/www/html/fifo/${sessionid}_tophp

@@ -38,7 +38,7 @@ function display_result() {
 	if(ajax_request.readyState == 4) { 	// 4 => page loaded
 	  if(ajax_request.status == 200)  {	// 200 => OK
 		log("Received response from send_command.php");
-		document.getElementById('terminal').innerHTML = ajax_request.responseText;
+		terminal(ajax_request.responseText);
 	  } else {
 		log("Unable to load response to your AJAX request");
 		alert("Unable to load response to your AJAX request.");
@@ -88,6 +88,13 @@ function log(text) {
 	log_obj.insertAdjacentHTML('beforeend', text + "<br>");
 	log_obj.scrollTop = log_obj.scrollHeight;
 }
+
+function terminal(text) {
+	var term_obj = document.getElementById('terminal');
+	term_obj.insertAdjacentHTML('beforeend', text + "<br>");
+	term_obj.scrollTop = term_obj.scrollHeight;
+}
+
 </script>
 </head>
 
@@ -96,7 +103,7 @@ function log(text) {
 	<h1 id="test_dispcmd" style="text-align:center;">WELCOME!</h1>
 </div>
 
-<div style="height:160px;border-bottom:1px green solid;">
+<div style="height:100px;border-bottom:1px green solid;">
 	<p id="put_state" style="color:blue;text-align:center;">
 		Welcome to carlosvazquez.ddns.net, a site powered by the fearsome Raspberry Pi computer:<br>
 		The Beast, running Apache. 
