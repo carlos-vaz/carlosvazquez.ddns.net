@@ -6,6 +6,8 @@
 <title>Carlos Home Page</title>
 <script language=javascript type="text/javascript">
 var ajax_request;
+var parser = new DOMParser();
+var sessionid = null;
 var count = 0;
 function new_request() {
 	document.getElementById('test_dispcmd').innerHTML = document.getElementById('user_command').value;
@@ -17,12 +19,13 @@ function new_request() {
 	}
 	if (ajax_request != null) {
 		ajax_request.onreadystatechange = display_result;
-		var url = "/driveloop.php";
-		var payload = "cmd=PAYLOAD";
+		var url = "/send_command.php";
+		var cmd = document.getElementById('user_command').value;
+		var payload = "cmd=" + cmd + "&sessionid=" + sessionid;
 		ajax_request.open("POST", url, true);
 		ajax_request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		ajax_request.send(payload);
-		log("Sent AJAX request to run command " + " PAYLOAD");
+		log("Sent AJAX request to run command " + cmd);
 		count = count + 1;
 		document.getElementById('counter').innerHTML = count;
 	} else {
@@ -34,7 +37,7 @@ function display_result() {
 	document.getElementById('put_state').innerHTML = ajax_request.readyState;
 	if(ajax_request.readyState == 4) { 	// 4 => page loaded
 	  if(ajax_request.status == 200)  {	// 200 => OK
-		log("Received response from driveloop.php");
+		log("Received response from send_command.php");
 		document.getElementById('terminal').innerHTML = ajax_request.responseText;
 	  } else {
 		log("Unable to load response to your AJAX request");
@@ -68,8 +71,11 @@ function init_session() {
 function init_session_callback() {
 	if (session_request.readyState == 4) {
 	   if(session_request.status == 200) {
-		log("Response: initialized shell session...");
-		document.getElementById('terminal').insertAdjacentHTML('beforeend', session_request.responseText);
+		var responseHtml = parser.parseFromString(session_request.responseText, 'text/html');
+		log("Response: initialized shell session");
+		log("Your unique session id is " + responseHtml.getElementById('dest_log').innerHTML);
+		sessionid = responseHtml.getElementById('dest_log').innerHTML;
+		document.getElementById('terminal').insertAdjacentHTML('beforeend', responseHtml.getElementById('dest_terminal').innerHTML);
 	   } else {
 		log("Unable to load response to your AJAX request");
 		alert("Unable to load response to your AJAX request (init session request).");
@@ -92,7 +98,8 @@ function log(text) {
 
 <div style="height:160px;border-bottom:1px green solid;">
 	<p id="put_state" style="color:blue;text-align:center;">
-		This page is under construction. <br>Please check back in soon!
+		Welcome to carlosvazquez.ddns.net, a site powered by the fearsome Raspberry Pi computer:<br>
+		The Beast, running Apache. 
 	</p>
 	<input id="user_command" type="text" name="command">
 	<button onclick="new_request()">Request</button>

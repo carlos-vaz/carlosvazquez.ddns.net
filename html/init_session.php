@@ -6,12 +6,13 @@ $sessionid = md5($uid . shell_exec("cat /var/www/security/credentials"));
 shell_exec("echo " . $uid . " " . $sessionid . " >> /var/www/security/userlog");
 
 // Create named pipes, unique to this user, for passing commands to the session and outputs to php
-shell_exec("mkfifo /var/www/html/fifo/" . $uid . "_tobash");
-shell_exec("mkfifo /var/www/html/fifo/" . $uid . "_tophp");
+shell_exec("mkfifo /var/www/html/fifo/" . $sessionid . "_tobash");
+shell_exec("mkfifo /var/www/html/fifo/" . $sessionid . "_tophp");
 
 // Respond to AJAX request
-echo "Welcome, " . $uid . "!<br>";
+echo "<p id=\"dest_terminal\">Welcome, " . $uid . "!<br></p>";
+echo "<p id=\"dest_log\">" . $sessionid . "</p>";
 
 // Start a bash script implementing a simple Read Eval Print loop
-shell_exec("nohup /var/www/html/loop.sh > /dev/null &");
+shell_exec("nohup /var/www/html/session.sh " . $sessionid . " > /dev/null &");
 ?>
