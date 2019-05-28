@@ -1,12 +1,12 @@
 #!/bin/bash
 # Invoked automatically (by init_session.php) after loading carlosvazquez.ddns.net
 
-#TIMEOUT=600;	# timeout after 10 minutes
-
+TIMEOUT=30;
 sessionid=$1;
+pid=$$;
 
 # Schedule a cleanup of this session in TIMEOUT seconds
-#echo "/var/www/scripts/cleanup.sh "$sessionid | at now + 30 seconds;
+bash -c "sleep "${TIMEOUT}"; /var/www/scripts/webuser_cleanup.sh "${sessionid}" "${pid} &
 
 while true
 do
