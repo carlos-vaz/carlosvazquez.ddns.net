@@ -1,0 +1,6 @@
+#!/bin/bash
+
+gcc start_session_in_jail.c -o start_session_in_jail;
+chown root:root start_session_in_jail;
+chmod u+s start_session_in_jail;
+
