@@ -1,5 +1,6 @@
 #!/bi/bash
-# You are placed here as webuser (UID = 1001)
+# A simple read-eval-print loop
+# You are placed here as user: webuser (UID = 1001)
 
 sessionid=$1;
 cd /home/webuser;
