@@ -17,5 +17,5 @@ exec("cat /var/www/jail/fifo/" . $requested_session . "_tophp", $OUTPUT);
 foreach($OUTPUT as $line) {
 	echo $line . "<br>";
 }
-echo "<span style=\"color:blue\">beast$ </span>";
+echo "<span style=\"color:blue\">beast$</span> <input id=\"user_command\" type=\"text\" name=\"command\" style=\"display:inline-block;width:40%;\">";
 ?>

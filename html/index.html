@@ -9,6 +9,16 @@ var ajax_request;
 var parser = new DOMParser();
 var sessionid = null;
 var cmd = null;
+
+function add_keyup_listener() {
+	document.getElementById('user_command').addEventListener("keyup", function(event) {
+	        event.preventDefault();
+	        if(event.keyCode == 13) {
+	                new_request();
+	        }
+	});
+}
+
 function new_request() {
 	ajax_request = null;
 	if (window.XMLHttpRequest) {
@@ -34,8 +44,12 @@ function display_result() {
 	//document.getElementById('put_state').innerHTML = ajax_request.readyState;
 	if(ajax_request.readyState == 4) { 	// 4 => page loaded
 	  if(ajax_request.status == 200)  {	// 200 => OK
+		var old_inputbar = document.getElementById('user_command');
+		old_inputbar.parentNode.removeChild(old_inputbar);
 		log("Received response from send_command.php");
 		terminal(cmd + "<br>" + ajax_request.responseText);
+		document.getElementById('user_command').focus();
+		add_keyup_listener();
 	  } else {
 		log("Unable to load response to your AJAX request");
 		alert("Unable to load response to your AJAX request.");
@@ -73,6 +87,8 @@ function init_session_callback() {
 		log("Your unique session id is " + responseHtml.getElementById('dest_log').innerHTML);
 		sessionid = responseHtml.getElementById('dest_log').innerHTML;
 		document.getElementById('terminal').insertAdjacentHTML('beforeend', responseHtml.getElementById('dest_terminal').innerHTML);
+		document.getElementById('user_command').focus();
+		add_keyup_listener();
 	   } else {
 		log("Unable to load response to your AJAX request");
 		alert("Unable to load response to your AJAX request (init session request).");
@@ -82,7 +98,7 @@ function init_session_callback() {
 	
 function log(text) {
 	var log_obj = document.getElementById('log');
-	log_obj.insertAdjacentHTML('beforeend', text + "<br>");
+	log_obj.insertAdjacentHTML('beforeend', "--> " + text + "<br>");
 	log_obj.scrollTop = log_obj.scrollHeight;
 }
 
@@ -114,9 +130,7 @@ function terminal(text) {
 	<div id="right_content">
 		<div id="terminal_frame">
 		   <div>
-			<p style="text-align:center;display:inline-block;">TERMINAL</p>
-			<input id="user_command" type="text" name="command" style="display:inline-block;">
-			<button onclick="new_request()" style="display:inline-block;">Request</button>
+			<p style="text-align:center;">TERMINAL</p>
 			<div id="terminal" class="console"></div>
 		   </div>
 		</div>
@@ -127,6 +141,18 @@ function terminal(text) {
 	</div>
 </div>
 </body>
+<script language=javascript type="text/javascript">
+function add_click_listener() {
+	var terminal_area = document.getElementById('terminal');
+	terminal_area.addEventListener('click', function(event) {
+		if(terminal_area.contains(event.target)) {
+			document.getElementById('user_command').focus();
+			add_click_listener();
+		}
+	});
+}
 
+add_click_listener();
+</script>
 </html>
 
