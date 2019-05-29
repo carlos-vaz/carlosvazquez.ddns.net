@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
         setuid(0);
         char chroot_command[256];
         // argv[1] contains the session ID
-        snprintf(chroot_command, sizeof(chroot_command), "%s%s", "chroot /var/www/jail /session.sh ", argv[1]);
+        snprintf(chroot_command, sizeof(chroot_command), "%s%s", "chroot /var/www/jail /launch_session.sh ", argv[1]);
         system(chroot_command);
 
         return 0;
