@@ -3,7 +3,7 @@
 
 <head>
 <link rel="stylesheet" href="style.css">
-<title>Carlos Home Page</title>
+<title>Capture the Pi</title>
 <script language=javascript type="text/javascript">
 var ajax_request;
 var parser = new DOMParser();
@@ -97,25 +97,22 @@ function terminal(text) {
 
 <body onload="init_session()" style="background-color:rgb(200,200,200);">
 <div id="welcome">
-	<h1 style="text-align:center;">WELCOME!</h1>
+	<h1 style="text-align:center;">Capture the Pi!</h1>
 </div>
 
 <div style="height:100px;border-bottom:1px green solid;">
 	<p id="put_state" style="color:blue;text-align:center;">
-		Welcome to carlosvazquez.ddns.net, a site powered by a very fearsome<br>
-		Raspberry Pi computer running Apache known only as The Beast. 
+                Welcome to Capture the Pi! Use the terminal to try to hack your way outside of your "jail"!<br>
+                The terminal controls the same pi hosting this website... your goal is to penetrate the system<br>
+                and change the text of this page! For the source code, visit <a href="https://github.com/crlsvzqz5/carlosvazquez.ddns.net">the Github page</a>
 	</p>
 	<p style="font-size:smaller;text-align:center;">This site accepts cookies. Please send them to 507 Cato Street, Pittsburgh, PA.</p>
 </div>
 
 <div id="bottom">
-	<div id="pages">.</div>
-	<div id="middle_content">
-		<p style="text-align:top;">Check out this project's Github at<br>
-		<a href="https://github.com/crlsvzqz5/carlosvazquez.ddns.net" target="_blank">github.com/crlsvzqz5/carlosvazquez.ddns.net</a></p>
-	</div>
+	<div id="pages" style="margin:auto;"><p>[hack the pi and put your text here]</p></div>
 	<div id="right_content">
-		<div class="console_frame">
+		<div id="terminal_frame">
 		   <div>
 			<p style="text-align:center;display:inline-block;">TERMINAL</p>
 			<input id="user_command" type="text" name="command" style="display:inline-block;">
@@ -123,7 +120,7 @@ function terminal(text) {
 			<div id="terminal" class="console"></div>
 		   </div>
 		</div>
-		<div class="console_frame">
+		<div id="log_frame">
 			<p style="text-align:center;">EVENT LOG</p>
 			<div id="log" class="console"></div>
 		</div>
