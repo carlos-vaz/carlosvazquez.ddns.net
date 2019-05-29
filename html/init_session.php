@@ -2,7 +2,7 @@
 // First, assign a unique user ID to identify this sessions resources
 // TODO: lock userlog file when creating user
 $uid = substr("webuser-" . shell_exec("wc -l /var/www/security/userlog | awk -F ' ' '{print $1}'"), 0, -1);
-$sessionid = md5($uid . shell_exec("cat /var/www/security/credentials"));
+$sessionid = md5($uid . shell_exec("cat /var/www/security/credentials") . exec("date +%s%N"));
 shell_exec("echo " . $uid . " " . $sessionid . " >> /var/www/security/userlog");
 
 // Respond to AJAX request
