@@ -8,6 +8,9 @@ int main(int argc, char *argv[]) {
         char chroot_command[256];
         // argv[1] contains the session ID
         snprintf(chroot_command, sizeof(chroot_command), "%s%s", "chroot /var/www/jail /launch_session.sh ", argv[1]);
+        
+        // After this call is executed (won't return), the new root directory will be /var/www/jail/ and launch_session.sh
+        // will be running 
         system(chroot_command);
 
         return 0;
