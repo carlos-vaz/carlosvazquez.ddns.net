@@ -10,7 +10,11 @@ if (!file_exists("/var/www/jail/fifo/" . $requested_session . "_tophp") || !file
 }
 
 // Pass command request to session
-shell_exec("echo " . $command . " > /var/www/jail/fifo/" . $requested_session . "_tobash"); // blocks php until/unless session.sh has begun
+$fifo = fopen("/var/www/jail/fifo/" . $requested_session . "_tobash", "w"); // blocks until/unless reading fifo has begun
+fwrite($fifo, $command . "\n");
+fclose($fifo);
+
+//shell_exec("echo " . $command . " > /var/www/jail/fifo/" . $requested_session . "_tobash");
 
 // send output of bash back to the client
 exec("cat /var/www/jail/fifo/" . $requested_session . "_tophp", $OUTPUT);
@@ -18,4 +22,5 @@ foreach($OUTPUT as $line) {
 	echo $line . "<br>";
 }
 echo "<span style=\"color:blue\">beast$</span> <input id=\"user_command\" type=\"text\" name=\"command\" style=\"display:inline-block;width:40%;\">";
+
 ?>
